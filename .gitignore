@@ -1,2 +1,6 @@
 
 .vs/
+.vs/LinearList/v15/.suo
+*.db
+LinearList.vcxproj
+LinearList.vcxproj.filters
