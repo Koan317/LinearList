@@ -36,8 +36,27 @@ public:
 };
 
 template<class T>
-inline void SeqList<T>::reSize(int newSize)
-{
+inline void SeqList<T>::reSize(int newSize) {
+	if (newSize <= 0) {
+		cerr << "Invalid number of size." << endl;
+		return;
+	}
+	if (newSize != maxSize) {
+		T *newAarry = new T[newSize];
+		if (newAarry == nullptr) {
+			cerr << "An error occured when allocating the memory. " << endl;
+			exit(1);
+		}
+		int n = last + 1;
+		T *srcPtr = data;
+		T *destPtr = newArray;
+		while (n--) {
+			*destPtr++ = *srcPtr++;
+		}
+		delete[] data;
+		data = newAarry;
+		maxSize = newSize;
+	}
 }
 
 template<class T>
@@ -46,7 +65,7 @@ inline SeqList<T>::SeqList(int sz) {
 		maxSize = sz;
 		last = -1;
 		data = new T[maxSize];
-		if (data == NULL) {
+		if (data == nullptr) {
 			cerr << "An error occured when allocating the memory. " << endl;
 			exit(1);
 		}
@@ -59,7 +78,7 @@ inline SeqList<T>::SeqList(SeqList<T>& L) {
 	last = L.length() - 1;
 	T value;
 	data = new T[maxSize];
-	if (data == NULL) {
+	if (data == nullptr) {
 		cerr << "An error occured when allocating the memory. " << endl;
 	}
 	for (int i = 1; i <= last + 1; i++) {
