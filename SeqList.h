@@ -86,3 +86,13 @@ inline SeqList<T>::SeqList(SeqList<T>& L) {
 		data[i - 1] = value;
 	}
 }
+
+template<class T>
+inline int SeqList<T>::search(T & x) const {
+	for (int i = 0; i <= last; i++) {
+		if (data[i] == x) {
+			return i + 1;
+		}
+	}
+	return 0;
+}
