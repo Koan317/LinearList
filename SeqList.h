@@ -96,3 +96,45 @@ inline int SeqList<T>::search(T & x) const {
 	}
 	return 0;
 }
+
+template<class T>
+inline int SeqList<T>::locate(int i) const {
+	if (i >= 1 && i <= last + 1) {
+		return i;
+	}
+	else {
+		return 0;
+	}
+}
+
+template<class T>
+inline bool SeqList<T>::insert(int i, T & x) {
+	if (last == maxSize - 1) {
+		return false;
+	}
+	if (i<1 || i>last + 1) {
+		return false;
+	}
+	for (int j = last; j >= i; j--) {
+		data[j + 1] = data[j];
+	}
+	data[i] = x;
+	last++;
+	return true;
+}
+
+template<class T>
+inline bool SeqList<T>::remove(int i, T & x) {
+	if (last == -1) {
+		return false;
+	}
+	if (i<1 || i>last + 1) {
+		return false;
+	}
+	x = data[i - 1];
+	for (int j = i; j <= last; j++) {
+		data[j - 1] = data[j];
+	}
+	last--;
+	return true;
+}
