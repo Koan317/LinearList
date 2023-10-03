@@ -165,5 +165,5 @@ inline void SeqList<T>::output() {
 
 template<class T>
 inline SeqList<T> SeqList<T>::operator=(SeqList<T>& L) {
-	return SeqList<T>();
+	return SeqList<T>(L);
 }
