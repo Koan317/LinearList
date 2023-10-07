@@ -2,7 +2,7 @@ template<class T>
 class LinearList {
 public:
 	LinearList() {};
-	virtual ~LinearList() = 0;
+	~LinearList() {};
 	virtual int size()const = 0;
 	virtual int length()const = 0;
 	virtual int search(T& x)const = 0;
