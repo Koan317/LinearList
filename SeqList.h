@@ -2,10 +2,11 @@
 #include<iostream>
 #include<cstdlib>
 #include"LinearList.h"
+using namespace std;
 
 const int DEFAULT_SIZE = 100;
 template<class T>
-class SeqList :public LienarList<T> {
+class SeqList :public LinearList<T> {
 protected:
 	T* data;
 	int maxSize;
@@ -15,23 +16,24 @@ public:
 	SeqList(int sz = DEFAULT_SIZE);
 	SeqList(SeqList<T>& L);
 	~SeqList() { delete[] data; }
-	int size()const { return maxSize; }
-	int length()const { renturn last + 1; }
-	int search(T& x)const;
-	int locate(int i)const;
-	bool getData(int i, T& x) {
+	virtual int size()const { return maxSize; }
+	virtual int length()const { return last + 1; }
+	virtual int search(T& x)const;
+	virtual int locate(int i)const;
+	virtual bool getData(int i, T& x) {
 		if (i > 0 && i <= last + 1) { x = data[i - 1]; return true; }
 		else return false;
 	}
-	void setData(int i, T& x) {
+	virtual void setData(int i, T& x) {
 		if (i > 0 && i <= last + 1)data[i - 1] = x;
 	}
-	bool insert(int i, T& x);
-	bool remove(int i, T& x);
-	bool isEmpty() { return last == -1; }
-	bool isFull() { return last == maxSize - 1; }
-	void input();
-	void output();
+	virtual bool insert(int i, T& x);
+	virtual bool remove(int i, T& x);
+	virtual bool isEmpty()const { return last == -1; }
+	virtual bool isFull()const { return last == maxSize - 1; }
+	virtual void sort();
+	virtual void input();
+	virtual void output();
 	SeqList<T> operator=(SeqList<T>& L);
 };
 
@@ -42,8 +44,8 @@ inline void SeqList<T>::reSize(int newSize) {
 		return;
 	}
 	if (newSize != maxSize) {
-		T* newAarry = new T[newSize];
-		if (newAarry == nullptr) {
+		T* newArray = new T[newSize];
+		if (newArray == nullptr) {
 			cerr << "An error occured when allocating the memory. " << endl;
 			exit(1);
 		}
@@ -54,7 +56,7 @@ inline void SeqList<T>::reSize(int newSize) {
 			*destPtr++ = *srcPtr++;
 		}
 		delete[] data;
-		data = newAarry;
+		data = newArray;
 		maxSize = newSize;
 	}
 }
@@ -137,6 +139,20 @@ inline bool SeqList<T>::remove(int i, T& x) {
 	}
 	last--;
 	return true;
+}
+
+template<class T>
+inline void SeqList<T>::sort() {
+	T temp;
+	for (int i = 0; i < last; i++) {
+		for (int j = i; j <= last; j++) {
+			if (data[i] > data[j]) {
+				temp = data[i];
+				data[i] = data[j];
+				data[j] = temp;
+			}
+		}
+	}
 }
 
 template<class T>
