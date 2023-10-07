@@ -71,3 +71,5 @@ x64/Release/LinearList.tlog/link.write.1.tlog
 x64/Release/LinearList.tlog/unsuccessfulbuild
 x64/Release/test.obj
 x64/Release/vc143.pdb
+LinearList.vcxproj
+LinearList.vcxproj.filters
