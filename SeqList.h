@@ -181,5 +181,16 @@ inline void SeqList<T>::output() {
 
 template<class T>
 inline SeqList<T> SeqList<T>::operator=(SeqList<T>& L) {
-	return SeqList<T>(L);
+	maxSize = L.size();
+	last = L.length() - 1;
+	T value;
+	data = new T[maxSize];
+	if (data == nullptr) {
+		cerr << "An error occured when allocating the memory. " << endl;
+	}
+	for (int i = 1; i <= last + 1; i++) {
+		L.getData(i, value);
+		data[i - 1] = value;
+	}
+	return *this;
 }
